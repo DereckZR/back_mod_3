@@ -1,6 +1,6 @@
-class ProductRepository {
+class UserRepository {
     constructor() {
-        if (this.constructor === ProductRepository) {
+        if (this.constructor === UserRepository) {
             throw new Error("Cannot instantiate abstract class");
         }
     }
@@ -13,11 +13,15 @@ class ProductRepository {
         throw new Error("Method 'getById()' must be implemented.");
     }
 
-    async create(product) {
+    async getByEmail(email) {
+        throw new Error("Method 'getByEmail()' must be implemented.");
+    }
+
+    async create(user) {
         throw new Error("Method 'create()' must be implemented.");
     }
 
-    async update(id, product) {
+    async update(id, user) {
         throw new Error("Method 'update()' must be implemented.");
     }
 
@@ -26,4 +30,4 @@ class ProductRepository {
     }
 }
 
-module.exports = ProductRepository;
+module.exports = UserRepository;

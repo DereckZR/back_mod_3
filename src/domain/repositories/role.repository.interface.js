@@ -1,6 +1,6 @@
-class ProductRepository {
+class RoleRepository {
     constructor() {
-        if (this.constructor === ProductRepository) {
+        if (this.constructor === RoleRepository) {
             throw new Error("Cannot instantiate abstract class");
         }
     }
@@ -13,17 +13,21 @@ class ProductRepository {
         throw new Error("Method 'getById()' must be implemented.");
     }
 
-    async create(product) {
+    async create(role) {
         throw new Error("Method 'create()' must be implemented.");
     }
 
-    async update(id, product) {
+    async update(id, role) {
         throw new Error("Method 'update()' must be implemented.");
     }
 
     async delete(id) {
         throw new Error("Method 'delete()' must be implemented.");
     }
+
+    async getByName(name) {
+        throw new Error("Method 'getByName()' must be implemented.");
+    }
 }
 
-module.exports = ProductRepository;
+module.exports = RoleRepository;
