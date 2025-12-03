@@ -8,16 +8,18 @@ const app = express();
 connectDB();
 
 // Middlewares
-app.use(morgan('dev')); 
-app.use(express.json()); 
+app.use(morgan('dev'));
+app.use(express.json());
 
 // Routes
 const productRoutes = require('./src/presentation/routes/product.routes');
+const orderRoutes = require('./src/presentation/routes/order.routes');
 const userRoutes = require('./src/presentation/routes/user.routes');
 const roleRoutes = require('./src/presentation/routes/role.routes');
 const authRoutes = require('./src/presentation/routes/auth.routes'); // Importar rutas de autenticación
 
 app.use('/api/v1/products', productRoutes);
+app.use('/api/v1/orders', orderRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/roles', roleRoutes);
 app.use('/api/v1/auth', authRoutes); // Usar rutas de autenticación

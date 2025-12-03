@@ -4,7 +4,7 @@ class RoleService {
     constructor(roleRepository) {
         this.roleRepository = roleRepository;
     }
-    
+
     async getAllRoles() {
         return this.roleRepository.getAll();
     }

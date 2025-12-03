@@ -2,7 +2,7 @@ class UserController {
     constructor(userService) {
         this.userService = userService;
     }
-    
+
     getAll = async (req, res) => {
         try {
             const users = await this.userService.getAllUsers();
@@ -34,7 +34,7 @@ class UserController {
             if (error.message.includes('already exists')) {
                 return res.status(409).json({ message: error.message });
             }
-             if (error.message.includes('not found')) {
+            if (error.message.includes('not found')) {
                 return res.status(400).json({ message: error.message });
             }
             res.status(500).json({ message: 'Error creating user' });
@@ -51,7 +51,7 @@ class UserController {
                 res.status(404).json({ message: 'User not found' });
             }
         } catch (error) {
-             if (error.message.includes('not found')) {
+            if (error.message.includes('not found')) {
                 return res.status(400).json({ message: error.message });
             }
             res.status(500).json({ message: error.message });

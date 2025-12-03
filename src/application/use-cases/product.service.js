@@ -4,7 +4,7 @@ class ProductService {
     constructor(productRepository) { // ¡Depende de la interfaz!
         this.productRepository = productRepository;
     }
-    
+
     async getAllProducts() {
         return this.productRepository.getAll();
     }

@@ -2,7 +2,7 @@ class RoleController {
     constructor(roleService) {
         this.roleService = roleService;
     }
-    
+
     getAll = async (req, res) => {
         try {
             const roles = await this.roleService.getAllRoles();

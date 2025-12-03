@@ -6,7 +6,7 @@ class UserService {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository; // To validate and get role IDs
     }
-    
+
     async getAllUsers() {
         return this.userRepository.getAll();
     }
@@ -49,7 +49,7 @@ class UserService {
         }
 
         const roleIds = roles ? await this.getRoleIds(roles) : undefined;
-        
+
         const userEntity = new User(
             id,
             name,
