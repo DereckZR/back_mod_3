@@ -1,40 +1,59 @@
-const Role = require('../../domain/entities/role.entity');
+const Role = require("../../domain/entities/role.entity");
+const {
+  ConflictError,
+  NotFoundError,
+} = require("../../domain/errors/custom-error");
 
 class RoleService {
-    constructor(roleRepository) {
-        this.roleRepository = roleRepository;
+  constructor(roleRepository) {
+    this.roleRepository = roleRepository;
+  }
+
+  async getAllRoles() {
+    return this.roleRepository.getAll();
+  }
+
+  async getRoleById(id) {
+    const role = await this.roleRepository.getById(id);
+
+    if (!role) {
+      throw new NotFoundError("Role not found");
     }
 
-    async getAllRoles() {
-        return this.roleRepository.getAll();
+    return role;
+  }
+
+  async createRole(roleData) {
+    const roleEntity = new Role(null, roleData.name);
+    const existingRole = await this.roleRepository.getByName(roleData.name);
+
+    if (existingRole) {
+      throw new ConflictError("Role already exists");
     }
 
-    async getRoleById(id) {
-        return this.roleRepository.getById(id);
+    return this.roleRepository.create(roleEntity);
+  }
+
+  async updateRole(id, roleData) {
+    const roleEntity = new Role(id, roleData.name);
+
+    const updatedRole = await this.roleRepository.update(id, roleEntity);
+
+    if (!updatedRole) {
+      throw new NotFoundError("Role not found");
     }
 
-    async createRole(roleData) {
-        const roleEntity = new Role(
-            null,
-            roleData.name
-        );
-        const existingRole = await this.roleRepository.getByName(roleData.name);
-        if (existingRole) {
-            throw new Error('Role already exists');
-        }
-        return this.roleRepository.create(roleEntity);
+    return updatedRole;
+  }
+
+  async deleteRole(id) {
+    const role = await this.roleRepository.delete(id);
+
+    if (!role) {
+      throw new NotFoundError("Role not found");
     }
 
-    async updateRole(id, roleData) {
-        const roleEntity = new Role(
-            id,
-            roleData.name
-        );
-        return this.roleRepository.update(id, roleEntity);
-    }
-
-    async deleteRole(id) {
-        return this.roleRepository.delete(id);
-    }
+    return;
+  }
 }
 module.exports = RoleService;
